@@ -10,26 +10,59 @@ namespace EgorClient
     {
         static void Main(string[] args)
         {
-            Console.Write("Введите ip сервера -> ");
-            IPAddress ip;
-            if (!IPAddress.TryParse(Console.ReadLine(), out ip)) { Console.Clear(); Main(args); return; }
+            Console.WriteLine("Auto / EnterIp ?");
 
-            Console.Write("Введите порт сервера -> ");
-            int serverPort;
-            if (!int.TryParse(Console.ReadLine(), out serverPort)) { Console.Clear(); Main(args); return; }
+            var cmd = Console.ReadLine();
 
-            try
+            Console.Clear();
+
+            if (cmd == "A" || cmd == "Auto")
             {
-                Client client = new Client();
-                client.Connect(ip, serverPort);      
-                client.Start();
+                IPAddress ip = IPAddress.Parse("127.0.0.1");
 
-                Console.Write("Connected!\n");
+                int serverPort = 5555;
+
+                try
+                {
+                    Client client = new Client();
+                    client.Connect(ip, serverPort);
+                    client.Start();
+
+                    Console.Write("Connected!\n");
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine(ex);
+                }
             }
-            catch (Exception ex)
+            else
+            if (cmd == "E" || cmd == "Enter" || cmd == "EnterIp" || cmd == "Ip")
             {
-                Console.WriteLine(ex);
+                Console.Write("Введите ip сервера -> ");
+                IPAddress ip;
+                if (!IPAddress.TryParse(Console.ReadLine(), out ip)) { Console.Clear(); Main(args); return; }
+
+                Console.Write("Введите порт сервера -> ");
+                int serverPort;
+                if (!int.TryParse(Console.ReadLine(), out serverPort)) { Console.Clear(); Main(args); return; }
+
+                try
+                {
+                    Client client = new Client();
+                    client.Connect(ip, serverPort);
+                    client.Start();
+
+                    Console.Write("Connected!\n");
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine(ex);
+                }
             }
+            else
+                Main(args);
+
+            
 
 
         }

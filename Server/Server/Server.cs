@@ -12,13 +12,33 @@ namespace EgorServer
     {
         static void Main(string[] args)
         {
-            Console.Write("Введите порт сервера -> ");
-            int serverPort;
-            if (!int.TryParse(Console.ReadLine(), out serverPort)) { Console.Clear(); Main(args); return; }
-            Server server = new Server();
-            server.Start(serverPort);
+            Console.WriteLine("Auto / EnterIp ?");
 
-            Console.Write("Started!\n");
+            var cmd = Console.ReadLine();
+
+            Console.Clear();
+
+            if (cmd == "A"|| cmd== "Auto")
+            {
+                int serverPort = 5555;
+                Server server = new Server();
+                server.Start(serverPort);
+
+                Console.Write("Started!\n");
+            }
+            else 
+            if(cmd == "E" || cmd == "Enter" || cmd == "EnterIp" || cmd == "Ip")
+            {
+                Console.Write("Введите порт сервера -> ");
+                int serverPort;
+                if (!int.TryParse(Console.ReadLine(), out serverPort)) { Console.Clear(); Main(args); return; }
+                Server server = new Server();
+                server.Start(serverPort);
+
+                Console.Write("Started!\n");
+            }
+            else 
+            Main(args);
 
         }
     }
@@ -87,19 +107,18 @@ namespace EgorServer
             {
                 try
                 {
-                    //Получение------------------   
+                    // Получение
                     byte[] data = new byte[256];
-                   
+
                     socket.BeginReceive(data, 0, data.Length, SocketFlags.None, out err, ReceiveHandle, client);
                     client.are.WaitOne();
 
                     var receivedString = Encoding.Unicode.GetString(data, 0, data.Length).Trim('\0');
 
                     Console.WriteLine($"Client: {client.Id} -> " + receivedString + " :" + DateTime.Now.ToLongTimeString());
-                    //-------------------------------------------------------------
 
 
-                    //Таски
+                    // Таски
                     if (tasks.ContainsKey(receivedString))
                     {
                         currentTask = tasks[receivedString];
@@ -112,29 +131,15 @@ namespace EgorServer
                         tasks.Add(receivedString, currentTask);
                     }
 
-
-
-                    currentTask.ContinueWith(t =>
-                    {
-                        try
-                        {
-                            var result = t.Result;
-                            if (result != null) Send(socket, result);
-                        }
-                        catch
-                        {
-                            Console.WriteLine($"Client№ {client.Id} Офнул");
-                        }
-
-                    }, TaskContinuationOptions.NotOnCanceled);
+                    currentTask.ContinueWith(t => { Send(client, t.Result); }, TaskContinuationOptions.NotOnCanceled);
                 }
                 catch
                 {
-                    Console.WriteLine($"Client№ {client.Id} Офнул");
+                    break;
                 }
 
             }
-
+            Console.WriteLine($"Client№ {client.Id} Офнул");
         }
         
 
@@ -173,15 +178,21 @@ namespace EgorServer
                 return null; 
             }
         }
-      
-        private void Send(object _socket, object _data)
-        {
 
-            var socket = (Socket)_socket;
+        private void Send(object _client, object _data)
+        {
+            var client = ((Client)_client);
             var data = (byte[])_data;
 
             // отправляем ответочку
-            socket.Send(data);
+            try
+            {
+                client.socket.Send(data);
+            }
+            catch
+            {
+                Console.WriteLine($"Client№ {client.Id} Офнул");
+            }
         }
     }
 }
