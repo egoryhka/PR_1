@@ -1,0 +1,13 @@
+C:\Users\Egor\Desktop\ОС\Пр1_Моё\Server\Server\bin\Debug\netcoreapp3.1\Network.exe
+C:\Users\Egor\Desktop\ОС\Пр1_Моё\Server\Server\bin\Debug\netcoreapp3.1\Network.deps.json
+C:\Users\Egor\Desktop\ОС\Пр1_Моё\Server\Server\bin\Debug\netcoreapp3.1\Network.runtimeconfig.json
+C:\Users\Egor\Desktop\ОС\Пр1_Моё\Server\Server\bin\Debug\netcoreapp3.1\Network.runtimeconfig.dev.json
+C:\Users\Egor\Desktop\ОС\Пр1_Моё\Server\Server\bin\Debug\netcoreapp3.1\Network.dll
+C:\Users\Egor\Desktop\ОС\Пр1_Моё\Server\Server\bin\Debug\netcoreapp3.1\Network.pdb
+C:\Users\Egor\Desktop\ОС\Пр1_Моё\Server\Server\obj\Debug\netcoreapp3.1\Network.AssemblyInfoInputs.cache
+C:\Users\Egor\Desktop\ОС\Пр1_Моё\Server\Server\obj\Debug\netcoreapp3.1\Network.AssemblyInfo.cs
+C:\Users\Egor\Desktop\ОС\Пр1_Моё\Server\Server\obj\Debug\netcoreapp3.1\Network.csproj.CoreCompileInputs.cache
+C:\Users\Egor\Desktop\ОС\Пр1_Моё\Server\Server\obj\Debug\netcoreapp3.1\Network.dll
+C:\Users\Egor\Desktop\ОС\Пр1_Моё\Server\Server\obj\Debug\netcoreapp3.1\Network.pdb
+C:\Users\Egor\Desktop\ОС\Пр1_Моё\Server\Server\obj\Debug\netcoreapp3.1\Network.genruntimeconfig.cache
+C:\Users\Egor\Desktop\ОС\Пр1_Моё\Server\Server\obj\Debug\netcoreapp3.1\Network.csprojAssemblyReference.cache
