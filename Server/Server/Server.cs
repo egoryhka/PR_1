@@ -185,6 +185,7 @@ namespace EgorServer
             var data = (byte[])_data;
 
             // отправляем ответочку
+            if(client!=null && data!=null)
             try
             {
                 client.socket.Send(data);
